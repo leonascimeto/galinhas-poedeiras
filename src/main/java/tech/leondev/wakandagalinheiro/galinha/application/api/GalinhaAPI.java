@@ -14,4 +14,7 @@ public interface GalinhaAPI {
 
     @GetMapping
     List<GalinhaResponseDTO> listarGalinhas();
+
+    @GetMapping("{idGalinha}")
+    GalinhaResponseDTO buscarGalinhaPeloId(@PathVariable UUID idGalinha);
 }

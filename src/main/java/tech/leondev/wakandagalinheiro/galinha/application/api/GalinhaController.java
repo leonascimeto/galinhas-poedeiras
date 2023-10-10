@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.leondev.wakandagalinheiro.galinha.application.service.GalinhaService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -26,5 +27,13 @@ public class GalinhaController implements GalinhaAPI{
         List<GalinhaResponseDTO> galinhas = galinhaService.listarGalinhas();
         log.info("[end] GalinhaController - listarGalinhas");
         return galinhas;
+    }
+
+    @Override
+    public GalinhaResponseDTO buscarGalinhaPeloId(UUID idGalinha) {
+        log.info("[start] GalinhaController - buscarGalinhaPeloId");
+        GalinhaResponseDTO galinha = galinhaService.buscarGalinhaPeloId(idGalinha);
+        log.info("[end] GalinhaController - buscarGalinhaPeloId");
+        return galinha;
     }
 }
