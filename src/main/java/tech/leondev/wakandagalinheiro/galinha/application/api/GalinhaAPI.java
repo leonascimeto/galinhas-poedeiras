@@ -17,4 +17,7 @@ public interface GalinhaAPI {
 
     @GetMapping("{idGalinha}")
     GalinhaResponseDTO buscarGalinhaPeloId(@PathVariable UUID idGalinha);
+
+    @PatchMapping("{idGalinha}")
+    void alterarGalinha(@PathVariable UUID idGalinha, @RequestBody @Valid GalinhaRequestDTO galinhaRequestDTO);
 }

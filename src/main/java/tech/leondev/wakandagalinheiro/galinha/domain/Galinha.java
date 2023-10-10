@@ -30,4 +30,8 @@ public class Galinha {
         this.dataNascimento = galinhaRequestDTO.getDataNascimento();
     }
 
+    public void alteraGalinha(GalinhaRequestDTO galinhaRequestDTO) {
+        this.name = galinhaRequestDTO.getName();
+        this.dataNascimento = galinhaRequestDTO.getDataNascimento();
+    }
 }
