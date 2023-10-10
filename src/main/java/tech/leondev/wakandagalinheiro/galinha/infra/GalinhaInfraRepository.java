@@ -7,6 +7,7 @@ import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepo
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -27,5 +28,14 @@ public class GalinhaInfraRepository implements GalinhaRepository {
         List<Galinha> galinhas = galinhaSpringDataJpaRepository.findAll();
         log.info("[end] GalinhaInfraRepository - listarGalinhas");
         return galinhas;
+    }
+
+    @Override
+    public Galinha buscarGalinhaPeloId(UUID idGalinha) {
+        log.info("[start] GalinhaInfraRepository - buscarGalinhaPeloId");
+        Galinha galinha = galinhaSpringDataJpaRepository.findById(idGalinha)
+                        .orElseThrow(() -> new RuntimeException("Galinha não encontrada"));
+        log.info("[end] GalinhaInfraRepository - buscarGalinhaPeloId");
+        return galinha;
     }
 }
