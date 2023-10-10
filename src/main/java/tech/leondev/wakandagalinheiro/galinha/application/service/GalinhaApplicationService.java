@@ -8,6 +8,8 @@ import tech.leondev.wakandagalinheiro.galinha.application.api.GalinhaResponseDTO
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 @Service
@@ -19,5 +21,13 @@ public class GalinhaApplicationService implements GalinhaService{
         Galinha galinha = galinhaRepository.saveGalinha(new Galinha(galinhaRequestDTO));
         log.info("[start] GalinhaApplicationService - salvarGalinha");
         return new GalinhaResponseDTO(galinha);
+    }
+
+    @Override
+    public List<GalinhaResponseDTO> listarGalinhas() {
+        log.info("[start] GalinhaApplicationService - listarGalinhas");
+        List<Galinha> galinhas = galinhaRepository.listarGalinhas();
+        log.info("[end] GalinhaApplicationService - listarGalinhas");
+        return GalinhaResponseDTO.convertListGalinhas(galinhas);
     }
 }
