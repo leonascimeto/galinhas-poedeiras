@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tech.leondev.wakandagalinheiro.galinha.application.api.GalinhaRequestDTO;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,4 +24,10 @@ public class Galinha {
     private String name;
     @NotNull
     private LocalDateTime dataNascimento;
+
+    public Galinha(GalinhaRequestDTO galinhaRequestDTO){
+        this.name = galinhaRequestDTO.getName();
+        this.dataNascimento = galinhaRequestDTO.getDataNascimento();
+    }
+
 }
