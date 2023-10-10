@@ -12,4 +12,6 @@ public interface GalinhaRepository {
     List<Galinha> listarGalinhas();
 
     Galinha buscarGalinhaPeloId(UUID idGalinha);
+
+    void deletaGalinha(Galinha galinha);
 }
