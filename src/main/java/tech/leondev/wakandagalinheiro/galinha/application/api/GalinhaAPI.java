@@ -20,4 +20,7 @@ public interface GalinhaAPI {
 
     @PatchMapping("{idGalinha}")
     void alterarGalinha(@PathVariable UUID idGalinha, @RequestBody @Valid GalinhaRequestDTO galinhaRequestDTO);
+
+    @DeleteMapping("{idGalinha}")
+    void deletarGalinha(@PathVariable UUID idGalinha);
 }
