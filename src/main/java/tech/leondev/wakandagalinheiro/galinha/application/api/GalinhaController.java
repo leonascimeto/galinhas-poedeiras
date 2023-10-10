@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 import tech.leondev.wakandagalinheiro.galinha.application.service.GalinhaService;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 @RestController
@@ -16,5 +18,13 @@ public class GalinhaController implements GalinhaAPI{
         GalinhaResponseDTO galinha = galinhaService.salvarGalinha(galinhaRequestDTO);
         log.info("[end] GalinhaController - salvarGalinha");
         return galinha;
+    }
+
+    @Override
+    public List<GalinhaResponseDTO> listarGalinhas() {
+        log.info("[start] GalinhaController - listarGalinhas");
+        List<GalinhaResponseDTO> galinhas = galinhaService.listarGalinhas();
+        log.info("[end] GalinhaController - listarGalinhas");
+        return galinhas;
     }
 }

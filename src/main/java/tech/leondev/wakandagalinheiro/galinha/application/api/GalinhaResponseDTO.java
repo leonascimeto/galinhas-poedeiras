@@ -4,7 +4,9 @@ import lombok.Value;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Value
 public class GalinhaResponseDTO {
@@ -16,5 +18,9 @@ public class GalinhaResponseDTO {
         this.idGalinha = galinha.getIdGalinha();
         this.name = galinha.getName();
         this.dataNascimento = galinha.getDataNascimento();
+    }
+
+    public static List<GalinhaResponseDTO> convertListGalinhas(List<Galinha> galinhas) {
+        return galinhas.stream().map(GalinhaResponseDTO::new).collect(Collectors.toList());
     }
 }
