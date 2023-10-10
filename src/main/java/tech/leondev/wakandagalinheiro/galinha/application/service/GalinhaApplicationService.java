@@ -19,7 +19,7 @@ public class GalinhaApplicationService implements GalinhaService{
     @Override
     public GalinhaResponseDTO salvarGalinha(GalinhaRequestDTO galinhaRequestDTO) {
         log.info("[start] GalinhaApplicationService - salvarGalinha");
-        Galinha galinha = galinhaRepository.saveGalinha(new Galinha(galinhaRequestDTO));
+        Galinha galinha = galinhaRepository.salvarGalinha(new Galinha(galinhaRequestDTO));
         log.info("[start] GalinhaApplicationService - salvarGalinha");
         return new GalinhaResponseDTO(galinha);
     }
@@ -38,5 +38,14 @@ public class GalinhaApplicationService implements GalinhaService{
         Galinha galinha = galinhaRepository.buscarGalinhaPeloId(idGalinha);
         log.info("[end] GalinhaApplicationService - buscarGalinhaPeloId");
         return new GalinhaResponseDTO(galinha);
+    }
+
+    @Override
+    public void alterarGalinha(UUID idGalinha, GalinhaRequestDTO galinhaRequestDTO) {
+        log.info("[start] GalinhaApplicationService - alterarGalinha");
+        Galinha galinha = galinhaRepository.buscarGalinhaPeloId(idGalinha);
+        galinha.alteraGalinha(galinhaRequestDTO);
+        galinhaRepository.salvarGalinha(galinha);
+        log.info("[end] GalinhaApplicationService - alterarGalinha");
     }
 }
