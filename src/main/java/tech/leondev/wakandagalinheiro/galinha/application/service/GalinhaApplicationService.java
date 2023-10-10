@@ -9,6 +9,7 @@ import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepo
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -29,5 +30,13 @@ public class GalinhaApplicationService implements GalinhaService{
         List<Galinha> galinhas = galinhaRepository.listarGalinhas();
         log.info("[end] GalinhaApplicationService - listarGalinhas");
         return GalinhaResponseDTO.convertListGalinhas(galinhas);
+    }
+
+    @Override
+    public GalinhaResponseDTO buscarGalinhaPeloId(UUID idGalinha) {
+        log.info("[start] GalinhaApplicationService - buscarGalinhaPeloId");
+        Galinha galinha = galinhaRepository.buscarGalinhaPeloId(idGalinha);
+        log.info("[end] GalinhaApplicationService - buscarGalinhaPeloId");
+        return new GalinhaResponseDTO(galinha);
     }
 }
