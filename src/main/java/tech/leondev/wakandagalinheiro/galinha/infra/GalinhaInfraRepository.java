@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Log4j2
 @Repository
@@ -17,5 +19,13 @@ public class GalinhaInfraRepository implements GalinhaRepository {
         Galinha novaGalinha = galinhaSpringDataJpaRepository.save(galinha);
         log.info("[end] GalinhaInfraRepository - saveGalinha");
         return novaGalinha;
+    }
+
+    @Override
+    public List<Galinha> listarGalinhas() {
+        log.info("[start] GalinhaInfraRepository - listarGalinhas");
+        List<Galinha> galinhas = galinhaSpringDataJpaRepository.findAll();
+        log.info("[end] GalinhaInfraRepository - listarGalinhas");
+        return galinhas;
     }
 }
