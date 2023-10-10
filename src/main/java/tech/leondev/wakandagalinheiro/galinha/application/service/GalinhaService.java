@@ -15,4 +15,6 @@ public interface GalinhaService {
     GalinhaResponseDTO buscarGalinhaPeloId(UUID idGalinha);
 
     void alterarGalinha(UUID idGalinha, GalinhaRequestDTO galinhaRequestDTO);
+
+    void deletaGalinha(UUID idGalinha);
 }
