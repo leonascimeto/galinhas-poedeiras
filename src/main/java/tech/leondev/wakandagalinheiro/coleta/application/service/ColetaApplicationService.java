@@ -11,6 +11,7 @@ import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepo
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Log4j2
@@ -34,5 +35,13 @@ public class ColetaApplicationService implements ColetaService{
         List<Coleta> coletas = coletaRepository.listaColetas();
         log.info("[end] ColetaApplicationService - listaColetas");
         return ColetaResponseDTO.convertColetaList(coletas);
+    }
+
+    @Override
+    public ColetaResponseDTO buscaColetaPeloId(UUID idColeta) {
+        log.info("[start] ColetaApplicationService - buscaColetaPeloId");
+        Coleta coleta = coletaRepository.buscaColetaPeloId(idColeta);
+        log.info("[end] ColetaApplicationService - buscaColetaPeloId");
+        return new ColetaResponseDTO(coleta);
     }
 }
