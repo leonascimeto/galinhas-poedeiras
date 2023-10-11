@@ -36,4 +36,11 @@ public class ColetaController implements ColetaAPI{
         log.info("[end] ColetaController - buscaColetaPeloId");
         return coleta;
     }
+
+    @Override
+    public void alteraColeta(ColetaRequestDTO coletaRequestDTO, UUID idColeta) {
+        log.info("[start] ColetaController - updateColeta");
+        coletaService.alteraColeta(coletaRequestDTO, idColeta);
+        log.info("[end] ColetaController - updateColeta");
+    }
 }

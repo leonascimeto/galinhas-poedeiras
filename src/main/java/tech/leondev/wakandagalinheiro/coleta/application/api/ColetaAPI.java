@@ -18,4 +18,7 @@ public interface ColetaAPI {
 
     @GetMapping("{idColeta}")
     ColetaResponseDTO buscaColetaPeloId(@PathVariable UUID idColeta);
+
+    @PatchMapping("{idColeta}")
+    void alteraColeta(@RequestBody @Valid ColetaRequestDTO coletaRequestDTO, @PathVariable UUID idColeta);
 }
