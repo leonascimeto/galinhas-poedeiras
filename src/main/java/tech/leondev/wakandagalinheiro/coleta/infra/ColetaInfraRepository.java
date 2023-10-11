@@ -7,6 +7,7 @@ import tech.leondev.wakandagalinheiro.coleta.application.repository.ColetaReposi
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -27,5 +28,14 @@ public class ColetaInfraRepository implements ColetaRepository {
         List<Coleta> coletas = coletaSpringDataJpaRepository.findAll();
         log.info("[end] ColetaInfraRepository - listaColetas");
         return coletas;
+    }
+
+    @Override
+    public Coleta buscaColetaPeloId(UUID idColeta) {
+        log.info("[start] ColetaInfraRepository - buscaColetaPeloId");
+        Coleta coleta = coletaSpringDataJpaRepository.findById(idColeta)
+                        .orElseThrow(() -> new RuntimeException("Coleta não encontrada"));
+        log.info("[end] ColetaInfraRepository - buscaColetaPeloId");
+        return coleta;
     }
 }
