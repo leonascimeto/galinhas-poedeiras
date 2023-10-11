@@ -5,6 +5,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 import tech.leondev.wakandagalinheiro.coleta.application.service.ColetaService;
 
+import java.util.List;
+
 @Log4j2
 @RequiredArgsConstructor
 @RestController
@@ -16,5 +18,13 @@ public class ColetaController implements ColetaAPI{
         ColetaResponseDTO coleta = coletaService.salvaColeta(coletaRequestDTO);
         log.info("[end] ColetaController - salvarColeta");
         return coleta;
+    }
+
+    @Override
+    public List<ColetaResponseDTO> listaColetas() {
+        log.info("[start] ColetaController - listaColetas");
+        List<ColetaResponseDTO> coletas = coletaService.listaColetas();
+        log.info("[end] ColetaController - listaColetas");
+        return coletas;
     }
 }

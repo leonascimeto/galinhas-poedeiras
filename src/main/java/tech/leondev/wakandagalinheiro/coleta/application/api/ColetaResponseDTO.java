@@ -6,7 +6,9 @@ import lombok.Value;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Value
 public class ColetaResponseDTO {
@@ -20,5 +22,9 @@ public class ColetaResponseDTO {
         this.idGalinha = coleta.getGalinha().getIdGalinha();
         this.quantidadeOvos = coleta.getQuantidadeOvos();
         this.dataColeta = coleta.getDataColeta();
+    }
+
+    public static List<ColetaResponseDTO> convertColetaList(List<Coleta> coletas) {
+        return coletas.stream().map(ColetaResponseDTO::new).collect(Collectors.toList());
     }
 }
