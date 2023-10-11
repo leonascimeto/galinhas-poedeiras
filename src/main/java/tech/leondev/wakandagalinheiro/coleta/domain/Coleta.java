@@ -34,4 +34,10 @@ public class Coleta {
         this.dataColeta = coletaRequestDTO.getDataColeta();
         this.galinha = galinha;
     }
+
+    public void alteraColeta(ColetaRequestDTO coletaRequestDTO, Galinha galinha) {
+        this.quantidadeOvos = coletaRequestDTO.getQuantidadeOvos();
+        this.dataColeta = coletaRequestDTO.getDataColeta();
+        this.galinha = galinha;
+    }
 }

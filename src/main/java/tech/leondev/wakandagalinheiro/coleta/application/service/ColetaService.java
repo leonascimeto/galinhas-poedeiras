@@ -14,4 +14,6 @@ public interface ColetaService {
     List<ColetaResponseDTO> listaColetas();
 
     ColetaResponseDTO buscaColetaPeloId(UUID idColeta);
+
+    void alteraColeta(ColetaRequestDTO coletaRequestDTO, UUID idColeta);
 }

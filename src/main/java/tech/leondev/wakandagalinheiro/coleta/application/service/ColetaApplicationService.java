@@ -44,4 +44,14 @@ public class ColetaApplicationService implements ColetaService{
         log.info("[end] ColetaApplicationService - buscaColetaPeloId");
         return new ColetaResponseDTO(coleta);
     }
+
+    @Override
+    public void alteraColeta(ColetaRequestDTO coletaRequestDTO, UUID idColeta) {
+        log.info("[start] ColetaApplicationService - alteraColeta");
+        Coleta coleta = coletaRepository.buscaColetaPeloId(idColeta);
+        Galinha galinha = galinhaRepository.buscarGalinhaPeloId(coletaRequestDTO.getIdGalinha());
+        coleta.alteraColeta(coletaRequestDTO, galinha);
+        coletaRepository.salvarColeta(coleta);
+        log.info("[end] ColetaApplicationService - alteraColeta");
+    }
 }
