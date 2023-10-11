@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tech.leondev.wakandagalinheiro.coleta.application.service.ColetaService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @RequiredArgsConstructor
@@ -26,5 +27,13 @@ public class ColetaController implements ColetaAPI{
         List<ColetaResponseDTO> coletas = coletaService.listaColetas();
         log.info("[end] ColetaController - listaColetas");
         return coletas;
+    }
+
+    @Override
+    public ColetaResponseDTO buscaColetaPeloId(UUID idColeta) {
+        log.info("[start] ColetaController - buscaColetaPeloId");
+        ColetaResponseDTO coleta = coletaService.buscaColetaPeloId(idColeta);
+        log.info("[end] ColetaController - buscaColetaPeloId");
+        return coleta;
     }
 }

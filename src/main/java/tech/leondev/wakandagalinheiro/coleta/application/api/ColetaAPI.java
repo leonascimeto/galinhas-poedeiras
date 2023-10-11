@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("v1/coletas")
@@ -14,4 +15,7 @@ public interface ColetaAPI {
 
     @GetMapping
     List<ColetaResponseDTO> listaColetas();
+
+    @GetMapping("{idColeta}")
+    ColetaResponseDTO buscaColetaPeloId(@PathVariable UUID idColeta);
 }
