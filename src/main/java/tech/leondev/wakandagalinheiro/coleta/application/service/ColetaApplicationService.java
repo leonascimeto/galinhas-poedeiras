@@ -10,12 +10,15 @@ import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Log4j2
 @Service
 public class ColetaApplicationService implements ColetaService{
     private final ColetaRepository coletaRepository;
     private final GalinhaRepository galinhaRepository;
+
     @Override
     public ColetaResponseDTO salvaColeta(ColetaRequestDTO coletaRequestDTO) {
         log.info("[start] ColetaApplicationService - salvaColeta");
@@ -23,5 +26,13 @@ public class ColetaApplicationService implements ColetaService{
         Coleta coleta = coletaRepository.salvarColeta(new Coleta(coletaRequestDTO, galinha));
         log.info("[end] ColetaApplicationService - salvaColeta");
         return new ColetaResponseDTO(coleta);
+    }
+
+    @Override
+    public List<ColetaResponseDTO> listaColetas() {
+        log.info("[start] ColetaApplicationService - listaColetas");
+        List<Coleta> coletas = coletaRepository.listaColetas();
+        log.info("[end] ColetaApplicationService - listaColetas");
+        return ColetaResponseDTO.convertColetaList(coletas);
     }
 }
