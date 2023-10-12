@@ -11,4 +11,6 @@ public interface ColetaRepository {
     List<Coleta> listaColetas();
 
     Coleta buscaColetaPeloId(UUID idColeta);
+
+    void deletaColeta(Coleta coleta);
 }

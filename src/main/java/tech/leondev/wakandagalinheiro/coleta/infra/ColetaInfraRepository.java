@@ -38,4 +38,11 @@ public class ColetaInfraRepository implements ColetaRepository {
         log.info("[end] ColetaInfraRepository - buscaColetaPeloId");
         return coleta;
     }
+
+    @Override
+    public void deletaColeta(Coleta coleta) {
+        log.info("[start] ColetaInfraRepository - buscaColetaPeloId");
+        coletaSpringDataJpaRepository.delete(coleta);
+        log.info("[end] ColetaInfraRepository - buscaColetaPeloId");
+    }
 }
