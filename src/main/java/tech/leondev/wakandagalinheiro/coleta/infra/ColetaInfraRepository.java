@@ -2,9 +2,11 @@ package tech.leondev.wakandagalinheiro.coleta.infra;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import tech.leondev.wakandagalinheiro.coleta.application.repository.ColetaRepository;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
+import tech.leondev.wakandagalinheiro.handler.ApiException;
 
 import java.util.List;
 import java.util.UUID;
@@ -34,7 +36,7 @@ public class ColetaInfraRepository implements ColetaRepository {
     public Coleta buscaColetaPeloId(UUID idColeta) {
         log.info("[start] ColetaInfraRepository - buscaColetaPeloId");
         Coleta coleta = coletaSpringDataJpaRepository.findById(idColeta)
-                        .orElseThrow(() -> new RuntimeException("Coleta não encontrada"));
+                        .orElseThrow(() -> ApiException.build(HttpStatus.BAD_REQUEST, "Coleta não encontrada"));
         log.info("[end] ColetaInfraRepository - buscaColetaPeloId");
         return coleta;
     }
