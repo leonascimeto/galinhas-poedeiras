@@ -2,11 +2,13 @@ package tech.leondev.wakandagalinheiro.galinha.infra;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import tech.leondev.wakandagalinheiro.galinha.application.api.GalinhaRequestDTO;
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
+import tech.leondev.wakandagalinheiro.handler.ApiException;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,7 +38,7 @@ public class GalinhaInfraRepository implements GalinhaRepository {
     public Galinha buscarGalinhaPeloId(UUID idGalinha) {
         log.info("[start] GalinhaInfraRepository - buscarGalinhaPeloId");
         Galinha galinha = galinhaSpringDataJpaRepository.findById(idGalinha)
-                        .orElseThrow(() -> new RuntimeException("Galinha não encontrada"));
+                .orElseThrow(() -> ApiException.build(HttpStatus.BAD_REQUEST, "Galinha não encontrada"));
         log.info("[end] GalinhaInfraRepository - buscarGalinhaPeloId");
         return galinha;
     }
