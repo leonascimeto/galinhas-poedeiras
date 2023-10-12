@@ -54,4 +54,13 @@ public class ColetaApplicationService implements ColetaService{
         coletaRepository.salvarColeta(coleta);
         log.info("[end] ColetaApplicationService - alteraColeta");
     }
+
+    @Override
+    public void deletaColeta(UUID idColeta) {
+        log.info("[start] ColetaApplicationService - deletaColeta");
+        Coleta coleta = coletaRepository.buscaColetaPeloId(idColeta);
+        coletaRepository.deletaColeta(coleta);
+        log.info("[end] ColetaApplicationService - deletaColeta");
+
+    }
 }
