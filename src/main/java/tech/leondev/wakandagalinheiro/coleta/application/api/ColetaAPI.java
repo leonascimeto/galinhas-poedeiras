@@ -30,7 +30,7 @@ public interface ColetaAPI {
 
     @PatchMapping("{idColeta}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void alteraColeta(@RequestBody @Valid ColetaRequestDTO coletaRequestDTO, @PathVariable UUID idColeta);
+    void alteraColeta(@RequestBody @Valid ColetaAlteraRequestDTO coletaAlteraRequestDTO, @PathVariable UUID idColeta);
 
     @DeleteMapping("{idColeta}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

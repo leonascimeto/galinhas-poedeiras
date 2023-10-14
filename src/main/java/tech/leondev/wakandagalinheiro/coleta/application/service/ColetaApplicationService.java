@@ -3,6 +3,7 @@ package tech.leondev.wakandagalinheiro.coleta.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaDiariaGalinhaResponseDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaResponseDTO;
@@ -50,11 +51,11 @@ public class ColetaApplicationService implements ColetaService{
     }
 
     @Override
-    public void alteraColeta(ColetaRequestDTO coletaRequestDTO, UUID idColeta) {
+    public void alteraColeta(ColetaAlteraRequestDTO coletaAlteraRequestDTO, UUID idColeta) {
         log.info("[start] ColetaApplicationService - alteraColeta");
         Coleta coleta = coletaRepository.buscaColetaPeloId(idColeta);
-        Galinha galinha = galinhaRepository.buscarGalinhaPeloId(coletaRequestDTO.getIdGalinha());
-        coleta.alteraColeta(coletaRequestDTO, galinha);
+        Galinha galinha = galinhaRepository.buscarGalinhaPeloId(coletaAlteraRequestDTO.getIdGalinha());
+        coleta.alteraColeta(coletaAlteraRequestDTO, galinha);
         coletaRepository.salvarColeta(coleta);
         log.info("[end] ColetaApplicationService - alteraColeta");
     }

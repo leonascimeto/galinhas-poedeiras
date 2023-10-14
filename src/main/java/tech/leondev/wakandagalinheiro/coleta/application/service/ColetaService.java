@@ -1,6 +1,7 @@
 package tech.leondev.wakandagalinheiro.coleta.application.service;
 
 
+import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaDiariaGalinhaResponseDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaResponseDTO;
@@ -17,7 +18,7 @@ public interface ColetaService {
 
     ColetaResponseDTO buscaColetaPeloId(UUID idColeta);
 
-    void alteraColeta(ColetaRequestDTO coletaRequestDTO, UUID idColeta);
+    void alteraColeta(ColetaAlteraRequestDTO coletaAlteraRequestDTO, UUID idColeta);
 
     void deletaColeta(UUID idColeta);
 

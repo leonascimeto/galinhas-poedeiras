@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
@@ -31,13 +32,13 @@ public class Coleta {
 
     public Coleta(ColetaRequestDTO coletaRequestDTO, Galinha galinha){
         this.quantidadeOvos = coletaRequestDTO.getQuantidadeOvos();
-        this.dataColeta = coletaRequestDTO.getDataColeta();
+        this.dataColeta = LocalDateTime.now();
         this.galinha = galinha;
     }
 
-    public void alteraColeta(ColetaRequestDTO coletaRequestDTO, Galinha galinha) {
-        this.quantidadeOvos = coletaRequestDTO.getQuantidadeOvos();
-        this.dataColeta = coletaRequestDTO.getDataColeta();
+    public void alteraColeta(ColetaAlteraRequestDTO coletaAlteraRequestDTO, Galinha galinha) {
+        this.quantidadeOvos = coletaAlteraRequestDTO.getQuantidadeOvos();
+        this.dataColeta = coletaAlteraRequestDTO.getDataColeta();
         this.galinha = galinha;
     }
 }
