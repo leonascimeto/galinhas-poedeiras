@@ -2,9 +2,7 @@ package tech.leondev.wakandagalinheiro.coleta.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequestDTO;
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
@@ -13,7 +11,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Builder
 @Getter
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity(name = "coletas")
 @Table(name = "coletas")
