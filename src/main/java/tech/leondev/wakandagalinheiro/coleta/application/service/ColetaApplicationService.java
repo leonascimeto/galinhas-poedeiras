@@ -10,8 +10,6 @@ import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepo
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
