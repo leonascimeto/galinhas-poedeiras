@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,10 @@ public interface ColetaAPI {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     List<ColetaResponseDTO> listaColetas();
+
+    @GetMapping("galinhas/{idGalinha}/byDate/{data}")
+    @ResponseStatus(HttpStatus.OK)
+    ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(@PathVariable UUID idGalinha, @PathVariable LocalDate data);
 
     @GetMapping("{idColeta}")
     @ResponseStatus(HttpStatus.OK)

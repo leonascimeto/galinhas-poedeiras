@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 import tech.leondev.wakandagalinheiro.coleta.application.service.ColetaService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,6 +28,14 @@ public class ColetaController implements ColetaAPI{
         List<ColetaResponseDTO> coletas = coletaService.listaColetas();
         log.info("[end] ColetaController - listaColetas");
         return coletas;
+    }
+
+    @Override
+    public ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(UUID idGalinha, LocalDate data) {
+        log.info("[start] ColetaController - totalColetaPorGalinhaPorData");
+        ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha = coletaService.coletaDiariaPorGalinha(idGalinha, data);
+        log.info("[end] ColetaController - totalColetaPorGalinhaPorData");
+        return coletaDiariaPorGalinha;
     }
 
     @Override

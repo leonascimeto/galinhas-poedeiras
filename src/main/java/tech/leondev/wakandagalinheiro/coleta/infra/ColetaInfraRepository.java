@@ -1,13 +1,16 @@
 package tech.leondev.wakandagalinheiro.coleta.infra;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import tech.leondev.wakandagalinheiro.coleta.application.repository.ColetaRepository;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
+import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 import tech.leondev.wakandagalinheiro.handler.ApiException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +19,8 @@ import java.util.UUID;
 @Repository
 public class ColetaInfraRepository implements ColetaRepository {
     private final ColetaSpringDataJpaRepository coletaSpringDataJpaRepository;
+    private final EntityManager entityManager;
+
     @Override
     public Coleta salvarColeta(Coleta coleta) {
         log.info("[start] ColetaInfraRepository - salvarColeta");
@@ -46,5 +51,15 @@ public class ColetaInfraRepository implements ColetaRepository {
         log.info("[start] ColetaInfraRepository - buscaColetaPeloId");
         coletaSpringDataJpaRepository.delete(coleta);
         log.info("[end] ColetaInfraRepository - buscaColetaPeloId");
+    }
+
+    @Override
+    public int totalOvosDiarioPorGalinha(Galinha galinha, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+        log.info("[start] ColetaInfraRepository - totalOvosDiarioPorGalinha");
+        Integer totalOvos = coletaSpringDataJpaRepository.calcularTotalOvosPorGalinhaNoIntervalo(
+                galinha, dataInicial, dataFinal
+        );
+        log.info("[end] ColetaInfraRepository - totalOvosDiarioPorGalinha");
+        return totalOvos != null ? totalOvos : 0;
     }
 }
