@@ -24,6 +24,10 @@ public interface ColetaAPI {
     @ResponseStatus(HttpStatus.OK)
     ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(@PathVariable UUID idGalinha, @PathVariable LocalDate data);
 
+    @GetMapping("byDate/{data}")
+    @ResponseStatus(HttpStatus.OK)
+    ColetaDiariaResponseDTO listColetasPorData(@PathVariable LocalDate data);
+
     @GetMapping("{idColeta}")
     @ResponseStatus(HttpStatus.OK)
     ColetaResponseDTO buscaColetaPeloId(@PathVariable UUID idColeta);

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -15,7 +16,7 @@ public class ColetaResponseDTO {
     private UUID idColeta;
     private UUID idGalinha;
     private int quantidadeOvos;
-    private LocalDateTime dataColeta;
+    private LocalDate dataColeta;
 
     public ColetaResponseDTO(Coleta coleta) {
         this.idColeta = coleta.getIdColeta();

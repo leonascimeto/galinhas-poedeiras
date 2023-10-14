@@ -9,6 +9,7 @@ import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequest
 import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -25,14 +26,14 @@ public class Coleta {
     private int quantidadeOvos;
     @NotNull
     @Column(name = "data_coleta")
-    private LocalDateTime dataColeta;
+    private LocalDate dataColeta;
     @ManyToOne
     @JoinColumn(name = "id_galinha")
     private Galinha galinha;
 
     public Coleta(ColetaRequestDTO coletaRequestDTO, Galinha galinha){
         this.quantidadeOvos = coletaRequestDTO.getQuantidadeOvos();
-        this.dataColeta = LocalDateTime.now();
+        this.dataColeta = LocalDate.now();
         this.galinha = galinha;
     }
 

@@ -39,6 +39,14 @@ public class ColetaController implements ColetaAPI{
     }
 
     @Override
+    public ColetaDiariaResponseDTO listColetasPorData(LocalDate data) {
+        log.info("[start] ColetaController - listColetasDiaria");
+        ColetaDiariaResponseDTO coletaDiariaResponseDTO = coletaService.listColetasDiaria(data);
+        log.info("[end] ColetaController - listColetasDiaria");
+        return coletaDiariaResponseDTO;
+    }
+
+    @Override
     public ColetaResponseDTO buscaColetaPeloId(UUID idColeta) {
         log.info("[start] ColetaController - buscaColetaPeloId");
         ColetaResponseDTO coleta = coletaService.buscaColetaPeloId(idColeta);
