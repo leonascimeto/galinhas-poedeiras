@@ -3,6 +3,7 @@ package tech.leondev.wakandagalinheiro.coleta.application.repository;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -16,5 +17,7 @@ public interface ColetaRepository {
 
     void deletaColeta(Coleta coleta);
 
-    int totalOvosDiarioPorGalinha(Galinha galinha, LocalDateTime dataInicial, LocalDateTime dataFinal);
+    int totalOvosDiarioPorGalinha(Galinha galinha, LocalDate data);
+
+    List<Coleta> findColetasPorData(LocalDate data);
 }

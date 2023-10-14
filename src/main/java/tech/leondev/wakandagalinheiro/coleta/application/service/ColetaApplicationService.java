@@ -3,10 +3,7 @@ package tech.leondev.wakandagalinheiro.coleta.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaAlteraRequestDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaDiariaGalinhaResponseDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaResponseDTO;
+import tech.leondev.wakandagalinheiro.coleta.application.api.*;
 import tech.leondev.wakandagalinheiro.coleta.application.repository.ColetaRepository;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
@@ -73,10 +70,22 @@ public class ColetaApplicationService implements ColetaService{
     public ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(UUID idGalinha, LocalDate data) {
         log.info("[start] ColetaApplicationService - coletaDiariaPorGalinha");
         Galinha galinha = galinhaRepository.buscarGalinhaPeloId(idGalinha);
-        LocalDateTime dataInicial = data.atStartOfDay();
-        LocalDateTime dataFinal = data.atTime(LocalTime.MAX);
-        int totalOvos = coletaRepository.totalOvosDiarioPorGalinha(galinha, dataInicial, dataFinal);
+        int totalOvos = coletaRepository.totalOvosDiarioPorGalinha(galinha, data);
         log.info("[end] ColetaApplicationService - coletaDiariaPorGalinha");
         return new ColetaDiariaGalinhaResponseDTO(galinha, totalOvos);
+    }
+
+    @Override
+    public ColetaDiariaResponseDTO listColetasDiaria(LocalDate data) {
+        log.info("[start] ColetaApplicationService - listColetasDiaria");
+        List<Coleta> coletas = coletaRepository.findColetasPorData(data);
+        int totalOvos = this.calcularTotalOvos(coletas);
+        List<ColetaResponseDTO> coletasResponse = ColetaResponseDTO.convertColetaList(coletas);
+        log.info("[end] ColetaApplicationService - listColetasDiaria");
+        return new ColetaDiariaResponseDTO(totalOvos, coletasResponse);
+    }
+
+    Integer calcularTotalOvos(List<Coleta> coletas){
+        return coletas.stream().mapToInt(Coleta::getQuantidadeOvos).sum();
     }
 }

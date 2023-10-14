@@ -10,6 +10,7 @@ import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 import tech.leondev.wakandagalinheiro.handler.ApiException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -54,12 +55,20 @@ public class ColetaInfraRepository implements ColetaRepository {
     }
 
     @Override
-    public int totalOvosDiarioPorGalinha(Galinha galinha, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+    public int totalOvosDiarioPorGalinha(Galinha galinha, LocalDate data) {
         log.info("[start] ColetaInfraRepository - totalOvosDiarioPorGalinha");
         Integer totalOvos = coletaSpringDataJpaRepository.calcularTotalOvosPorGalinhaNoIntervalo(
-                galinha, dataInicial, dataFinal
+                galinha, data
         );
         log.info("[end] ColetaInfraRepository - totalOvosDiarioPorGalinha");
         return totalOvos != null ? totalOvos : 0;
+    }
+
+    @Override
+    public List<Coleta> findColetasPorData(LocalDate data) {
+        log.info("[start] ColetaInfraRepository - findColetasPorData");
+        List<Coleta> coletas = coletaSpringDataJpaRepository.findAllByDataColeta(data);
+        log.info("[end] ColetaInfraRepository - findColetasPorData");
+        return coletas;
     }
 }
