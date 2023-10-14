@@ -55,19 +55,17 @@ public class ColetaInfraRepository implements ColetaRepository {
     }
 
     @Override
-    public int totalOvosDiarioPorGalinha(Galinha galinha, LocalDate data) {
-        log.info("[start] ColetaInfraRepository - totalOvosDiarioPorGalinha");
-        Integer totalOvos = coletaSpringDataJpaRepository.calcularTotalOvosPorGalinhaNoIntervalo(
-                galinha, data
-        );
-        log.info("[end] ColetaInfraRepository - totalOvosDiarioPorGalinha");
-        return totalOvos != null ? totalOvos : 0;
-    }
-
-    @Override
     public List<Coleta> findColetasPorData(LocalDate data) {
         log.info("[start] ColetaInfraRepository - findColetasPorData");
         List<Coleta> coletas = coletaSpringDataJpaRepository.findAllByDataColeta(data);
+        log.info("[end] ColetaInfraRepository - findColetasPorData");
+        return coletas;
+    }
+
+    @Override
+    public List<Coleta> findColetasPorGalinhaData(Galinha galinha, LocalDate data) {
+        log.info("[start] ColetaInfraRepository - findColetasPorData");
+        List<Coleta> coletas = coletaSpringDataJpaRepository.findAllByGalinhaAndDataColeta(galinha, data);
         log.info("[end] ColetaInfraRepository - findColetasPorData");
         return coletas;
     }

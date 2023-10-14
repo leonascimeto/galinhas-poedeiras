@@ -17,7 +17,7 @@ public interface ColetaRepository {
 
     void deletaColeta(Coleta coleta);
 
-    int totalOvosDiarioPorGalinha(Galinha galinha, LocalDate data);
-
     List<Coleta> findColetasPorData(LocalDate data);
+
+    List<Coleta> findColetasPorGalinhaData(Galinha galinha, LocalDate data);
 }

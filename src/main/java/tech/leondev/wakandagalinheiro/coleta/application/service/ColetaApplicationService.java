@@ -70,9 +70,11 @@ public class ColetaApplicationService implements ColetaService{
     public ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(UUID idGalinha, LocalDate data) {
         log.info("[start] ColetaApplicationService - coletaDiariaPorGalinha");
         Galinha galinha = galinhaRepository.buscarGalinhaPeloId(idGalinha);
-        int totalOvos = coletaRepository.totalOvosDiarioPorGalinha(galinha, data);
+        List<Coleta> coletasPorGalinhaData = coletaRepository.findColetasPorGalinhaData(galinha, data);
+        int totalOvos = this.calcularTotalOvos(coletasPorGalinhaData);
+        List<ColetaResponseDTO> coletasResponse = ColetaResponseDTO.convertColetaList(coletasPorGalinhaData);
         log.info("[end] ColetaApplicationService - coletaDiariaPorGalinha");
-        return new ColetaDiariaGalinhaResponseDTO(galinha, totalOvos);
+        return new ColetaDiariaGalinhaResponseDTO(galinha, coletasResponse, totalOvos);
     }
 
     @Override
