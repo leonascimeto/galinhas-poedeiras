@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Tag(name = "Galinhas", description = "Recurso relacionado ao gerenciamento de galinhas poedeiras")
+@Tag(name = "Coletas", description = "Recurso relacionado ao gerenciamento de coleta de ovos.")
 @RestController
 @RequestMapping("v1/coletas")
 public interface ColetaAPI {
@@ -49,7 +49,7 @@ public interface ColetaAPI {
     ColetaDiariaResponseDTO listColetasPorData(@PathVariable LocalDate data);
 
     @Operation(
-            summary = "Busca coleta pelo ID",
+            summary = "Busca coleta",
             description = "Busca detalhes de uma coleta pelo ID."
     )
     @GetMapping("{idColeta}")
