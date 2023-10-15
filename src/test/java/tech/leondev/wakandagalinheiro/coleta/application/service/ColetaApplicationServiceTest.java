@@ -8,10 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tech.leondev.wakandagalinheiro.DataHelper;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaDiariaGalinhaResponseDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaDiariaResponseDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaRequestDTO;
-import tech.leondev.wakandagalinheiro.coleta.application.api.ColetaResponseDTO;
+import tech.leondev.wakandagalinheiro.coleta.application.api.*;
 import tech.leondev.wakandagalinheiro.coleta.application.repository.ColetaRepository;
 import tech.leondev.wakandagalinheiro.coleta.domain.Coleta;
 import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepository;
@@ -52,10 +49,10 @@ class ColetaApplicationServiceTest {
 
     @Test
     void deveLstarTodasColetasComSucesso(){
-        when(coletaRepository.listaColetas()).thenReturn(DataHelper.gerarListaColeta());
+        when(coletaRepository.listaColetas()).thenReturn(DataHelper.gerarListaColetaParaMedia());
         List<ColetaResponseDTO> response = coletaApplicationService.listaColetas();
         verify(coletaRepository, times(1)).listaColetas();
-        assertEquals(3, response.size());
+        assertEquals(5, response.size());
     }
 
     @Test
@@ -108,8 +105,27 @@ class ColetaApplicationServiceTest {
     }
 
     @Test
+    void deveListarColetasPorIntervaloDetempo(){
+        when(coletaRepository.findColetasPorIntervalo(DataHelper.COLETA_DATA, DataHelper.COLETA_DATA_2))
+                .thenReturn(DataHelper.gerarListaColetaParaMedia());
+        ColetaIntervalResponseDTO response = coletaApplicationService
+                .listaColetaPorIntervalo(DataHelper.COLETA_DATA, DataHelper.COLETA_DATA_2);
+        assertEquals(5, response.getColetas().size());
+        assertEquals(18, response.getTotalOvos());
+        assertEquals(9.0, response.getMediaOvosPorDia());
+    }
+
+    @Test
     void deveCalcularTotalOvos(){
         int totalOvos = coletaApplicationService.calcularTotalOvos(DataHelper.gerarListaColeta());
         assertEquals(6, totalOvos);
+    }
+
+    @Test
+    void deveCalcularMediaDiariaOvos(){
+        double media = coletaApplicationService.calcularMediaDiariaOvos(13,
+                DataHelper.COLETA_DATA,
+                DataHelper.COLETA_DATA_2);
+        assertEquals(6.5, media);
     }
 }

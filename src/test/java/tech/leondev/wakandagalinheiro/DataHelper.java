@@ -20,6 +20,7 @@ public class DataHelper {
 
     public static final UUID COLETA_ID = UUID.fromString("9671fc6a-5b56-41d6-8bde-61fe09d25f81");
     public static LocalDate COLETA_DATA = LocalDate.of(2023, 10, 14);
+    public static LocalDate COLETA_DATA_2 = LocalDate.of(2023, 10, 15);
     public static LocalDate COLETA_DATA_ALTERADO = LocalDate.of(2023, 9, 14);
 
     public static Coleta gerarColeta(){
@@ -48,7 +49,20 @@ public class DataHelper {
                 );
     }
 
-    public static Galinha gerarGalinha(){
+    public static List<Coleta> gerarListaColetaParaMedia(){
+        Galinha galinha = DataHelper.gerarGalinha();
+        return List.of(
+                Coleta.builder().idColeta(UUID.randomUUID()).dataColeta(COLETA_DATA).quantidadeOvos(2).galinha(galinha).build(),
+                Coleta.builder().idColeta(UUID.randomUUID()).dataColeta(COLETA_DATA).quantidadeOvos(1).galinha(galinha).build(),
+                Coleta.builder().idColeta(UUID.randomUUID()).dataColeta(COLETA_DATA).quantidadeOvos(3).galinha(galinha).build(),
+                Coleta.builder().idColeta(UUID.randomUUID()).dataColeta(COLETA_DATA_2).quantidadeOvos(8).galinha(galinha).build(),
+                Coleta.builder().idColeta(UUID.randomUUID()).dataColeta(COLETA_DATA_2).quantidadeOvos(4).galinha(galinha).build()
+        );
+    }
+
+
+
+        public static Galinha gerarGalinha(){
         return Galinha.builder()
                 .idGalinha(GALINHA_ID)
                 .name(GALINHA_NOME)
