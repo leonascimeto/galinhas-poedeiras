@@ -11,8 +11,8 @@ public class ColetaDiariaResponseDTO {
     private Integer totalOvos;
     private List<ColetaResponseDTO> coletas;
 
-    public ColetaDiariaResponseDTO(int totalOvos, List<ColetaResponseDTO> coletasResponse) {
-        this.data = LocalDate.now();
+    public ColetaDiariaResponseDTO(int totalOvos, List<ColetaResponseDTO> coletasResponse, LocalDate data) {
+        this.data = data;
         this.totalOvos = totalOvos;
         this.coletas = coletasResponse;
     }

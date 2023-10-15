@@ -1,6 +1,7 @@
 package tech.leondev.wakandagalinheiro.coleta.application.api;
 
 import jakarta.validation.Valid;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,13 +25,17 @@ public interface ColetaAPI {
     @ResponseStatus(HttpStatus.OK)
     ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(@PathVariable UUID idGalinha, @PathVariable LocalDate data);
 
-    @GetMapping("byDate/{data}")
+    @GetMapping("porData/{data}")
     @ResponseStatus(HttpStatus.OK)
     ColetaDiariaResponseDTO listColetasPorData(@PathVariable LocalDate data);
 
     @GetMapping("{idColeta}")
     @ResponseStatus(HttpStatus.OK)
     ColetaResponseDTO buscaColetaPeloId(@PathVariable UUID idColeta);
+
+    @GetMapping("porIntervalo/inicio/{dataInicio}/fim/{dataFim}")
+    @ResponseStatus(HttpStatus.OK)
+    ColetaIntervalResponseDTO buscarColetaPorIntervalo(LocalDate dataInicio, LocalDate dataFim);
 
     @PatchMapping("{idColeta}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

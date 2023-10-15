@@ -55,6 +55,14 @@ public class ColetaController implements ColetaAPI{
     }
 
     @Override
+    public ColetaIntervalResponseDTO buscarColetaPorIntervalo(LocalDate dataInicio, LocalDate dataFim) {
+        log.info("[start] ColetaController - buscarColetaPorIntervalo");
+        ColetaIntervalResponseDTO coletas = coletaService.listaColetaPorIntervalo(dataInicio, dataFim);
+        log.info("[end] ColetaController - buscarColetaPorIntervalo");
+        return coletas;
+    }
+
+    @Override
     public void alteraColeta(ColetaAlteraRequestDTO coletaAlteraRequestDTO, UUID idColeta) {
         log.info("[start] ColetaController - updateColeta");
         coletaService.alteraColeta(coletaAlteraRequestDTO, idColeta);
