@@ -20,4 +20,6 @@ public interface ColetaRepository {
     List<Coleta> findColetasPorData(LocalDate data);
 
     List<Coleta> findColetasPorGalinhaData(Galinha galinha, LocalDate data);
+
+    List<Coleta> findColetasPorIntervalo(LocalDate dataInicio, LocalDate dataFim);
 }

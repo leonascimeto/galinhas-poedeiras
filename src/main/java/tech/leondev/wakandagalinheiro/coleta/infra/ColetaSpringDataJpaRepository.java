@@ -12,4 +12,6 @@ public interface ColetaSpringDataJpaRepository extends JpaRepository<Coleta, UUI
     List<Coleta> findAllByDataColeta(LocalDate data);
 
     List<Coleta> findAllByGalinhaAndDataColeta(Galinha galinha, LocalDate data);
+
+    List<Coleta> findAllByDataColetaBetween(LocalDate dataInicio, LocalDate dataFim);
 }

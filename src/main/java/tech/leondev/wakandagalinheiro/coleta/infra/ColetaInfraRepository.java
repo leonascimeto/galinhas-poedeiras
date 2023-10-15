@@ -69,4 +69,12 @@ public class ColetaInfraRepository implements ColetaRepository {
         log.info("[end] ColetaInfraRepository - findColetasPorData");
         return coletas;
     }
+
+    @Override
+    public List<Coleta> findColetasPorIntervalo(LocalDate dataInicio, LocalDate dataFim) {
+        log.info("[start] ColetaInfraRepository - findColetasPorIntervalo");
+        List<Coleta> coletas = coletaSpringDataJpaRepository.findAllByDataColetaBetween(dataInicio, dataFim);
+        log.info("[end] ColetaInfraRepository - findColetasPorIntervalo");
+        return coletas;
+    }
 }
