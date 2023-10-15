@@ -10,6 +10,7 @@ import tech.leondev.wakandagalinheiro.galinha.application.repository.GalinhaRepo
 import tech.leondev.wakandagalinheiro.galinha.domain.Galinha;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 
@@ -82,10 +83,28 @@ public class ColetaApplicationService implements ColetaService{
         int totalOvos = this.calcularTotalOvos(coletas);
         List<ColetaResponseDTO> coletasResponse = ColetaResponseDTO.convertColetaList(coletas);
         log.info("[end] ColetaApplicationService - listColetasDiaria");
-        return new ColetaDiariaResponseDTO(totalOvos, coletasResponse);
+        return new ColetaDiariaResponseDTO(totalOvos, coletasResponse, data);
     }
 
-    Integer calcularTotalOvos(List<Coleta> coletas){
+    @Override
+    public ColetaIntervalResponseDTO listaColetaPorIntervalo(LocalDate dataInicio, LocalDate dataFim) {
+        log.info("[start] ColetaApplicationService - listaColetaPorIntervalo");
+        List<Coleta> coletas = coletaRepository.findColetasPorIntervalo(dataInicio, dataFim);
+        int totalOvos = this.calcularTotalOvos(coletas);
+        double mediaOvos = this.calcularMediaDiariaOvos(totalOvos, dataInicio, dataFim);
+        List<ColetaResponseDTO> coletasResponse = ColetaResponseDTO.convertColetaList(coletas);
+        log.info("[end] ColetaApplicationService - listaColetaPorIntervalo");
+        return new ColetaIntervalResponseDTO(coletasResponse, totalOvos, mediaOvos);
+    }
+
+    public double calcularMediaDiariaOvos(int totalOvos, LocalDate dataInicio, LocalDate dataFim){
+        if(totalOvos == 0) return 0.0;
+        long dias = ChronoUnit.DAYS.between(dataInicio, dataFim) + 1;
+        return (double) totalOvos / dias;
+    }
+
+    public Integer calcularTotalOvos(List<Coleta> coletas){
+        if(coletas.isEmpty()) return 0;
         return coletas.stream().mapToInt(Coleta::getQuantidadeOvos).sum();
     }
 }

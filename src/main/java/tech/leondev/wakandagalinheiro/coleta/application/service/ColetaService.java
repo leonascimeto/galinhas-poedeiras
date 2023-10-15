@@ -22,4 +22,6 @@ public interface ColetaService {
     ColetaDiariaGalinhaResponseDTO coletaDiariaPorGalinha(UUID idGalinha, LocalDate data);
 
     ColetaDiariaResponseDTO listColetasDiaria(LocalDate data);
+
+    ColetaIntervalResponseDTO listaColetaPorIntervalo(LocalDate dataInicio, LocalDate dataFim);
 }
